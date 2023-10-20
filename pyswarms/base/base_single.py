@@ -45,6 +45,7 @@ class SwarmOptimizer(abc.ABC):
         self,
         n_particles,
         dimensions,
+        max_generations,
         options,
         bounds=None,
         velocity_clamp=None,
@@ -93,6 +94,7 @@ class SwarmOptimizer(abc.ABC):
         # Initialize primary swarm attributes
         self.n_particles = n_particles
         self.dimensions = dimensions
+        self.max_generations = max_generations
         self.bounds = bounds
         self.velocity_clamp = velocity_clamp
         self.swarm_size = (n_particles, dimensions)
@@ -204,6 +206,7 @@ class SwarmOptimizer(abc.ABC):
         self.swarm = create_swarm(
             n_particles=self.n_particles,
             dimensions=self.dimensions,
+            max_generations=self.max_generations,
             bounds=self.bounds,
             center=self.center,
             init_pos=self.init_pos,

@@ -187,6 +187,7 @@ def generate_velocity(n_particles, dimensions, clamp=None):
 def create_swarm(
     n_particles,
     dimensions,
+    max_generations,
     discrete=False,
     binary=False,
     options={},
@@ -242,4 +243,4 @@ def create_swarm(
         )
 
     velocity = generate_velocity(n_particles, dimensions, clamp=clamp)
-    return Swarm(position, velocity, options=options)
+    return Swarm(position, velocity, max_generations ,options=options)
