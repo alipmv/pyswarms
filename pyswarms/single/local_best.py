@@ -85,6 +85,7 @@ class LocalBestPSO(SwarmOptimizer):
         self,
         n_particles,
         dimensions,
+        max_generations,
         options,
         bounds=None,
         oh_strategy=None,
@@ -161,6 +162,7 @@ class LocalBestPSO(SwarmOptimizer):
         super(LocalBestPSO, self).__init__(
             n_particles=n_particles,
             dimensions=dimensions,
+            max_generations=max_generations,
             options=options,
             bounds=bounds,
             velocity_clamp=velocity_clamp,
@@ -181,7 +183,7 @@ class LocalBestPSO(SwarmOptimizer):
         self.name = __name__
 
     def optimize(
-        self, objective_func, iters, n_processes=None, verbose=True, **kwargs
+        self, objective_func, n_processes=None, verbose=True, **kwargs
     ):
         """Optimize the swarm for a number of iterations
 
@@ -212,7 +214,7 @@ class LocalBestPSO(SwarmOptimizer):
             log_level = logging.INFO
         else:
             log_level = logging.NOTSET
-
+        iters = self.max_generations
         self.rep.log("Obj. func. args: {}".format(kwargs), lvl=logging.DEBUG)
         self.rep.log(
             "Optimize for {} iters with {}".format(iters, self.options),
