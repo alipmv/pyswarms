@@ -215,7 +215,7 @@ class GlobalBestPSO(SwarmOptimizer):
             self.swarm.best_pos, self.swarm.best_cost = self.top.compute_gbest(self.swarm)
             # fmt: on
             if verbose:
-                self.rep.hook(best_cost=self.swarm.best_cost)
+                self.rep.hook(best_cost=self.swarm.best_cost,best_particle=(self.swarm.Gnum_of_best,self.swarm.idx_of_best))
             # Save to history
             hist = self.ToHistory(
                 best_cost=self.swarm.best_cost,
@@ -255,8 +255,8 @@ class GlobalBestPSO(SwarmOptimizer):
         ].copy()
         # Write report in log and return final cost and position
         self.rep.log(
-            "Optimization finished | best cost: {}, best pos: {}".format(
-                final_best_cost, final_best_pos
+            "Optimization finished | best cost: {}, at Gen: {}, Particle: {} with optimum values: {}".format(
+                final_best_cost, self.swarm.Gnum_of_best, self.swarm.idx_of_best, final_best_pos
             ),
             lvl=log_level,
         )
